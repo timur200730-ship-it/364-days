@@ -94,7 +94,8 @@ body{background:radial-gradient(ellipse at 50% 0%,#3a2528 0%,#1b1216 46%,#120d11
 <header class="top"><div></div><div class="brand"><img src="assets/leti-logo.png" alt="ЛеТи — крылья и звезда"></div><div class="top-actions"><button class="iconbtn" aria-label="Избранное" onclick="showPage('path')">♡</button><button class="iconbtn" aria-label="Разделы" onclick="showPage('sections')">☰</button></div></header>
 <section id="home" class="page active" style="padding:0"><div class="hero"><div class="hero-content"><h1>364 шага к себе</h1><div class="tagline">Истории · практики · вдохновение</div></div><button class="hero-cta" onclick="openDay(1)">Продолжить путь <small id="homeNext">День 1 · А чего хочешь ты?</small></button><div class="home-tiles"><button class="home-tile" onclick="showPage('path')"><span class="ico">▦</span>Мой путь<br>364 дня</button><button class="home-tile" onclick="showPage('practice')"><span class="ico">❀</span>Практики<br>и вопросы</button><button class="home-tile" onclick="showPage('journal')"><span class="ico">♡</span>Заметки<br>о себе</button><button class="home-tile" onclick="showPage('music')"><span class="ico">♫</span>Музыка<br>ЛеТи</button></div><div class="progress-card"><div class="progress-top"><b>✧ Мой путь к себе</b><span id="homeProgress">0 из 364</span></div><div class="track"><div class="fill" id="progressFill"></div></div></div></div></section>
 <section id="sections" class="page"><button class="back" onclick="showPage('home')">← Главная</button><div class="page-head"><div class="eyebrow">12 этапов внутреннего пути</div><h2>Истории, которые ведут к себе</h2><p class="muted">Каждый раздел — новая тема, новые открытия и маленькие шаги навстречу себе.</p></div><div class="section-grid" id="sectionGrid"></div></section>
-<section id="story" class="page"><button class="back" onclick="showPage('sections')">← К разделам</button><article class="reader"><div class="reader-title"><div class="day" id="storyDay">День 1 · Этап 1</div><h2 id="storyTitle">А чего хочешь ты?</h2></div><img class="reader-img" id="storyImage" src="assets/day-001-cafe.png" alt="Лея и Тим разговаривают в кафе"><div class="reader-body"><div class="story" id="storyText"></div><div class="insight"><h3>✧ Психологический смысл</h3><p id="storyInsight"></p></div><div class="practice"><h3 id="practiceTitle">❀ Шаг к себе</h3><p id="practiceText"></p><textarea id="practiceAnswer" placeholder="Мои мысли и ответы…"></textarea><button class="save" onclick="savePractice()">Сохранить мой шаг</button></div><div class="thought" id="storyQuote"></div><button class="save" style="width:100%;padding:14px" onclick="completeDay()" id="completeBtn">Отметить день пройденным ✓</button></div></article></section>
+<section id="chapter" class="page"><button class="back" onclick="showPage('sections')">← Ко всем главам</button><div class="page-head"><div class="eyebrow" id="chapterEyebrow">ЧАСТЬ I</div><h2 id="chapterTitle">А кто я, собственно?</h2><p class="muted" id="chapterDesc"></p></div><div id="chapterDays"></div></section>
+<section id="story" class="page"><button class="back" onclick="showPage('chapter')">← К главе</button><article class="reader"><div class="reader-title"><div class="day" id="storyDay">День 1 · Этап 1</div><h2 id="storyTitle">А чего хочешь ты?</h2></div><img class="reader-img" id="storyImage" src="assets/day-001-cafe.png" alt="Лея и Тим разговаривают в кафе"><div class="reader-body"><div class="story" id="storyText"></div><div class="insight"><h3>✧ Психологический смысл</h3><p id="storyInsight"></p></div><div class="practice"><h3 id="practiceTitle">❀ Шаг к себе</h3><p id="practiceText"></p><textarea id="practiceAnswer" placeholder="Мои мысли и ответы…"></textarea><button class="save" onclick="savePractice()">Сохранить мой шаг</button></div><div class="thought" id="storyQuote"></div><button class="save" style="width:100%;padding:14px" onclick="completeDay()" id="completeBtn">Отметить день пройденным ✓</button></div></article></section>
 <section id="practice" class="page"><button class="back" onclick="showPage('home')">← Главная</button><div class="page-head"><div class="eyebrow">Тихое время для себя</div><h2>Практики и вопросы</h2><p class="muted">Небольшие упражнения — не экзамен и не список обязательств. Выбирай то, что откликается.</p></div><div id="practiceList"></div></section>
 <section id="journal" class="page"><button class="back" onclick="showPage('home')">← Главная</button><div class="journal"><div class="eyebrow">Личное пространство</div><h2>Мой дневник</h2><p class="muted">Записи хранятся на этом устройстве. Пиши только то, чем хочется поделиться с собой.</p><input id="noteTitle" placeholder="Название записи"><textarea id="noteBody" placeholder="О чём мне хочется помнить? Что я чувствую? Что сегодня было важным?"></textarea><button class="gold-btn" style="margin-top:12px" onclick="saveNote()">Сохранить запись</button><h3 style="font:italic 22px 'Playfair Display';color:#ffe0ae;margin:25px 0 5px">Мои записи</h3><div id="notes"></div></div></section>
 <section id="music" class="page"><button class="back" onclick="showPage('home')">← Главная</button><div class="library"><div class="eyebrow">Звуковое пространство ЛеТи</div><h2>Музыка, которая рядом</h2><p class="muted">Три композиции проекта — слушай в своём темпе, возвращайся к любимым песням и бери их с собой в путь.</p>
@@ -120,18 +121,140 @@ const stages=[
 {title:'Я имею право мечтать',range:'Дни 305–334',desc:'Творчество, призвание, смелость и движение к важным целям.',day:305,story:'Мечта на полях',text:[`В блокноте Тима между рабочими заметками давно жила идея музыкального проекта. Он иногда перечитывал её и каждый раз находил причину отложить: не время, недостаточно опыта, слишком много неизвестного.`,`Лея заметила рисунок на полях.`,`— Ты всё ещё хочешь этим заниматься?`,`— Да. Но вдруг это несерьёзно?`,`— А кто решил, что важное обязательно должно выглядеть серьёзно для всех?`,`Тим улыбнулся. Он понял, что ждал разрешения от людей, которые даже не знали о его мечте.`,`Они договорились выделить один вечер на пробу: без обещаний, без публикации и без оценки. Просто сделать первый набросок.`,`В тот вечер музыка получилась неровной, но настоящей. И Тим почувствовал давно забытое удовольствие — не от результата, а от самого процесса.`],insight:'Мечта становится ближе, когда превращается в конкретное действие. Необязательно сразу знать весь маршрут или гарантировать успех; можно дать себе право на эксперимент.',practice:'Дать мечте место',practiceText:'Запиши мечту, которую давно откладываешь. Почему она важна именно тебе? Какой эксперимент на 30 минут поможет проверить интерес к ней на практике?',quote:'«Моим мечтам не нужно чужое разрешение, чтобы получить первый шанс».',cover:'assets/section-11.jpg'},
 {title:'Возвращение к себе',range:'Дни 335–364',desc:'Благодарность, целостность, принятие прошлого и свобода быть собой.',day:335,story:'Я дома',text:[`Они поднялись на холм до рассвета. Город внизу ещё мерцал редкими огнями, а небо медленно становилось золотым.`,`— Помнишь, как ты сказала, что не знаешь, чего хочешь? — спросил Тим.`,`Лея кивнула.`,`— Кажется, я всё ещё не знаю ответов на многие вопросы. Но теперь я хотя бы слышу, когда пытаюсь ответить за себя чужими словами.`,`— Это уже немало.`,`Она улыбнулась. За прошедшее время не исчезли все страхи, не решились автоматически все проблемы. Но Лея научилась останавливаться, замечать свои чувства, просить о поддержке и выбирать маленькие честные шаги.`,`— Я думала, однажды найду себя где-то далеко, — сказала она. — А оказалось, что возвращение начинается с того, как я разговариваю с собой каждый день.`,`Тим протянул ей руку. Впереди было много дорог. Но теперь Лея знала: ей не нужно терять себя, чтобы идти по ним.`],insight:'Возвращение к себе — не финальная точка, а продолжающаяся практика внимания, выбора и заботы. Изменения могут быть постепенными, а путь — нелинейным.',practice:'Мои опоры',practiceText:'Назови три вещи, которые помогают тебе оставаться собой. Запиши, чему ты научился(ась) за последнее время и какой бережный шаг хочешь взять с собой дальше.',quote:'«Я не обязана знать весь путь. Достаточно не терять связь с собой».',cover:'assets/section-12.jpg'}
 ];
-const availableDays=stages.map(s=>s.day);let currentStory=0;
+
+const day2 = {
+ day:2, title:'А кому ты хочешь что-то доказать?', chapter:0, image:'assets/section-01.jpg',
+ story:[
+`Утро субботы обещало быть прекрасным. За окном светило солнце, на кухне пахло свежесваренным кофе, а из колонки тихо звучала любимая музыка Леи.`,
+`Тим сидел за ноутбуком и сосредоточенно смотрел в экран.`,
+`— Доброе утро, любимый! — Лея обняла его за плечи. — Какие планы на сегодня?`,
+`— Сейчас закончу презентацию, отвечу на сообщения, подготовлю материалы для нового проекта, потом нужно посмотреть один обучающий курс, составить план на следующую неделю…`,
+`— А потом?`,
+`— Потом ещё несколько рабочих вопросов решу.`,
+`— А жить сегодня будем? — улыбнулась Лея.`,
+`— Конечно! Вот только всё доделаю.`,
+`Лея рассмеялась.`,
+`— Тим, я тебя давно знаю. У тебя это «всё доделаю» — какое-то бесконечное мероприятие.`,
+`Он улыбнулся, но от экрана не оторвался.`,
+`Лея поставила рядом с ним чашку кофе и устроилась напротив.`,
+`— Скажи, а когда ты в последний раз отдыхал и не думал о том, что мог бы в это время сделать что-нибудь полезное?`,
+`Тим задумался.`,
+`— Не помню. Мне нравится быть продуктивным. Я чувствую, что не зря проживаю день.`,
+`— А если ты сегодня ничего не сделаешь, день будет прожит зря?`,
+`— Ну… Наверное, мне будет некомфортно.`,
+`— Почему?`,
+`— Будет ощущение, что я потерял время. Пока я отдыхаю, кто-то развивается, учится, создаёт что-то новое. А я стою на месте.`,
+`Лея внимательно посмотрела на него.`,
+`— А ты с кем-то соревнуешься?`,
+`— Нет.`,
+`— Тогда куда ты так торопишься?`,
+`Тим хотел ответить, но неожиданно понял, что не знает ответа.`,
+`Он действительно постоянно куда-то спешил. Ставил цели, достигал их и практически сразу ставил новые. Закончив один проект, начинал другой. Даже во время прогулок слушал образовательные подкасты, а отдых старался совместить с чем-нибудь полезным.`,
+`Каждая достигнутая цель приносила удовлетворение, но ненадолго. Вскоре внутри снова появлялось беспокойство: недостаточно, мало, можно лучше, нужно больше.`,
+`Словно где-то существовала невидимая комиссия, которая ежедневно оценивала его жизнь.`,
+`— Тим, а кому ты всё время пытаешься что-то доказать? — тихо спросила Лея.`,
+`— Никому.`,
+`— Даже себе?`,
+`Он закрыл ноутбук.`,
+`Этот вопрос неожиданно задел что-то глубоко внутри.`,
+`Тим вспомнил, как в детстве приносил домой хорошие оценки и с нетерпением ждал похвалы. Как гордился своими первыми достижениями. Как однажды, получив второе место на соревнованиях, услышал:`,
+`— Молодец, конечно. Но мог бы быть и первым.`,
+`Никто не хотел причинить ему боль. Возможно, взрослые просто пытались его мотивировать. Но маленький Тим тогда решил, что быть хорошим недостаточно. Нужно быть лучшим.`,
+`И с тех пор он словно продолжал участвовать в соревнованиях, у которых не было финишной черты.`,
+`— Знаешь, — произнёс он после долгой паузы, — мне иногда кажется, что, если я остановлюсь, то перестану быть значимым.`,
+`Лея взяла его за руку.`,
+`— А для кого?`,
+`— Не знаю… Может быть, для самого себя.`,
+`— Послушай, любимый. Если сегодня ты не создашь ни одного проекта, не прочитаешь ни одной книги, не заработаешь ни рубля и не придумаешь ничего гениального, я не стану любить тебя меньше.`,
+`Тим посмотрел на неё.`,
+`— Даже если я весь день буду лежать на диване?`,
+`— Даже если будешь лежать на диване, есть печенье и смотреть совершенно бессмысленный фильм.`,
+`— Звучит как опасный эксперимент.`,
+`— Предлагаю начать с прогулки.`,
+`— А во время прогулки можно обсудить новый проект?`,
+`— Нет!`,
+`— Послушать лекцию?`,
+`— Нет!`,
+`— Составить стратегию развития?`,
+`— Тим!`,
+`Они оба рассмеялись.`,
+`Через полчаса они уже гуляли по парку. Без наушников, без рабочих звонков, без обсуждения планов и целей.`,
+`Тим несколько раз машинально доставал телефон, но потом убирал его обратно в карман.`,
+`Они кормили птиц, шутили, любовались небом, покупали горячий кофе и спорили о том, какое облако больше похоже на дракона.`,
+`И постепенно Тим почувствовал, как расслабляются его плечи, исчезает напряжение в челюсти, а мысли становятся спокойнее.`,
+`Мир не рухнул.`,
+`Никто не отобрал у него его достижения.`,
+`Он не стал менее умным, талантливым или значимым.`,
+`Он просто позволил себе несколько часов быть человеком, которому не нужно ничего достигать.`,
+`— Знаешь, Лея, — сказал он, обнимая её, — кажется, я так увлёкся созданием счастливой жизни, что иногда забываю быть счастливым.`,
+`— Тогда, может быть, пора не только создавать жизнь, но и проживать её?`,
+`Тим улыбнулся.`,
+`Вечером он открыл их большой блокнот «364 шага к себе» и написал:`,
+`«Сегодня я ничего великого не совершил. Не стал умнее, успешнее или продуктивнее. Я гулял с любимой женщиной, смеялся, пил кофе и смотрел на небо.`,
+`И, кажется, именно сегодня я прожил по-настоящему прекрасный день».`
+ ],
+ insightTitle:'Ловушка бесконечной продуктивности',
+ insight:[
+`Иногда за стремлением к постоянному развитию, успеху и достижениям скрывается не любовь к своему делу, а страх оказаться недостаточно хорошим.`,
+`Человек начинает измерять собственную ценность количеством выполненных задач, заработанных денег, реализованных проектов и полученных признаний.`,
+`Формируется условная самоценность:`,
+`Я ценен, когда приношу пользу.`,`Я достоин уважения, когда добиваюсь успеха.`,`Я имею право отдыхать, только когда всё сделал.`,`Я должен постоянно развиваться, иначе стану хуже других.`,`Чтобы быть значимым, я должен что-то доказывать.`,
+`Но в такой системе координат невозможно окончательно заслужить право на отдых. Всегда найдётся новая задача, новая цель, новая вершина.`,
+`Постоянная гонка может приводить к хроническому стрессу, эмоциональному истощению, раздражительности и потере способности получать удовольствие от жизни.`,
+`Важно научиться различать два внутренних мотива:`,
+`«Я хочу это сделать, потому что мне интересно» и «Я должен это сделать, иначе буду недостаточно хорошим».`,
+`Внешне действия могут быть одинаковыми, но внутреннее состояние совершенно разное.`,
+`Развитие из любви к жизни вдохновляет. Развитие из страха собственной незначимости может истощать.`,
+`Амбиции, мечты и стремление к успеху прекрасны, когда они являются нашим осознанным выбором, а не бесконечной попыткой доказать своё право на любовь, уважение и счастье.`
+ ],
+ practiceTitle:'Мне не нужно ничего доказывать',
+ questions:[
+`Что я чувствую, когда ничего полезного не делаю?`,
+`Кому и что я пытаюсь доказать своими достижениями?`,
+`Чьего признания или одобрения я до сих пор жду?`,
+`Какие мои цели рождаются из искреннего желания, а какие — из страха быть недостаточно хорошим?`,
+`Если убрать все мои достижения, должности, деньги и заслуги, за что я могу ценить себя?`,
+`Чем бы я занимался, если бы мне больше не нужно было никому ничего доказывать?`
+ ],
+ taskTitle:'Практическое задание на сегодня',
+ task:`Подари себе 30 минут, в течение которых тебе не нужно быть продуктивным. Не учись, не работай, не совершенствуй себя, не решай чужие проблемы. Сделай что-нибудь исключительно ради собственного удовольствия. Прогуляйся, послушай музыку, посмотри на небо, потанцуй, прими тёплую ванну или просто выпей чашку любимого чая. Если появится чувство вины, заметь его, не осуждая себя, и мягко напомни себе:`,
+ affirmations:[
+`Я имею право отдыхать, даже если не все дела закончены.`,
+`Моя ценность не измеряется моей продуктивностью.`,
+`Мне не нужно заслуживать право на счастье.`,
+`Я могу стремиться к большему, не обесценивая себя сегодняшнего.`
+ ],
+ thoughtTitle:'Мысль дня',
+ thought:`Ты пришёл в этот мир не для того, чтобы всю жизнь доказывать, что достоин в нём находиться. Ты можешь создавать, развиваться, достигать, мечтать и покорять вершины. Но пусть движущей силой станет любовь к жизни, а не страх оказаться недостаточно хорошим. Не превращай свою жизнь в бесконечный экзамен. Иногда самый важный шаг к себе — это разрешить себе остановиться и просто пожить.`,
+ signature:'С любовью, Лея и Тим.'
+};
+const chapters=stages.map((s,i)=>({ ...s, index:i, stories:[{day:s.day,title:s.story,image:s.image||s.cover,story:s.text,insightTitle:'Психологический смысл',insight:[s.insight],practiceTitle:s.practice,task:s.practiceText,thought:s.quote,chapter:i}] }));
+chapters[0].stories.push(day2);
+const findStory=(n)=>{for(const c of chapters){const found=c.stories.find(x=>x.day===n);if(found)return {chapter:c,story:found};}return null;};
+const availableDays=chapters.flatMap(c=>c.stories.map(x=>x.day));let currentStory=0;
+
 function get(k,d){try{return JSON.parse(localStorage.getItem('leti-'+k))??d}catch{return d}}function put(k,v){try{localStorage.setItem('leti-'+k,JSON.stringify(v))}catch{toast('Не удалось сохранить данные на устройстве')}}
 function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='journal')renderNotes();if(id==='path')renderCalendar()}
 function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2300)}
-function renderSections(){document.getElementById('sectionGrid').innerHTML=stages.map((s,i)=>`<article class="section-card"><img src="${s.cover}" alt="Иллюстрация: ${s.title}"><div class="section-info"><small>ЭТАП ${String(i+1).padStart(2,'0')} · ${s.range.toUpperCase()}</small><h3>${s.title}</h3><p>${s.desc}</p><button class="gold-btn" onclick="openStory(${i})">Открыть историю</button></div></article>`).join('');document.getElementById('pathSections').innerHTML=stages.map((s,i)=>`<div class="saved-note"><small>ЭТАП ${String(i+1).padStart(2,'0')} · ${s.range}</small><br><b>${s.title}</b><p class="small-note">День ${s.day} · ${s.story}</p><button class="gold-btn" onclick="openStory(${i})">Читать</button></div>`).join('')}
-function openStory(i){currentStory=i;let s=stages[i];document.getElementById('storyDay').textContent=`День ${s.day} · Этап ${i+1}`;document.getElementById('storyTitle').textContent=s.story;document.getElementById('storyImage').src=s.image||s.cover;document.getElementById('storyImage').alt=`Лея и Тим · ${s.story}`;document.getElementById('storyText').innerHTML=s.text.map(p=>`<p>${esc(p)}</p>`).join('');document.getElementById('storyInsight').textContent=s.insight;document.getElementById('practiceTitle').textContent=`❀ Шаг к себе · ${s.practice}`;document.getElementById('practiceText').textContent=s.practiceText;document.getElementById('storyQuote').textContent=s.quote;document.getElementById('practiceAnswer').value=get('practice-'+s.day,'');let done=get('completedDays',[]).includes(s.day);document.getElementById('completeBtn').textContent=done?'День уже пройден ✓':'Отметить день пройденным ✓';showPage('story')}
-function openDay(n){let i=stages.findIndex(s=>s.day===n);if(i>=0){openStory(i);return}if(get('completedDays',[]).includes(n)){toast('Этот день уже отмечен золотом ✧');return}toast('История этого дня появится в следующем обновлении. Путь уже подготовлен ♡')}
-function savePractice(){let s=stages[currentStory],v=document.getElementById('practiceAnswer').value.trim();if(!v){toast('Сначала запиши то, что откликается');return}put('practice-'+s.day,v);toast('Твой шаг сохранён ♡')}
-function completeDay(){let s=stages[currentStory],days=get('completedDays',[]);if(!days.includes(s.day)){days.push(s.day);days.sort((a,b)=>a-b);put('completedDays',days)}updateProgress();document.getElementById('completeBtn').textContent='День уже пройден ✓';toast('Этот шаг теперь сияет золотом. Береги себя ♡')}
-function updateProgress(){let days=get('completedDays',[]),n=days.length,pct=n/364*100;['progressFill','progressFill2'].forEach(id=>{let e=document.getElementById(id);if(e)e.style.width=pct+'%'});document.getElementById('homeProgress').textContent=`${n} из 364`;document.getElementById('progressLabel').textContent=`${n} / 364`;document.getElementById('calendarCount').textContent=`${n} / 364`;let next=stages.find(s=>!days.includes(s.day));document.getElementById('homeNext').textContent=next?`День ${next.day} · ${next.story}`:'Все опубликованные истории пройдены';renderCalendar()}
+
+function openChapter(i){let c=chapters[i];document.getElementById('chapterEyebrow').textContent=`ЧАСТЬ ${['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][i]} · ${c.range}`;document.getElementById('chapterTitle').textContent=c.title;document.getElementById('chapterDesc').textContent=c.desc;document.getElementById('chapterDays').innerHTML=c.stories.slice().sort((a,b)=>a.day-b.day).map(st=>`<div class="library" style="margin-bottom:12px"><div class="eyebrow">ДЕНЬ ${st.day}</div><h2 style="font-size:24px">${esc(st.title)}</h2><p class="muted">${st.day===2?'История, психологический смысл и расширенная практика.':'История и шаг к себе.'}</p><button class="gold-btn" onclick="openDay(${st.day})">Читать историю</button></div>`).join('')+`<p class="small-note">Истории следующих дней этой главы будут добавляться сюда по мере подготовки рукописи.</p>`;showPage('chapter')}
+function renderSections(){document.getElementById('sectionGrid').innerHTML=chapters.map((c,i)=>`<article class="section-card"><img src="${c.cover}" alt="Иллюстрация: ${c.title}"><div class="section-info"><small>ЧАСТЬ ${String(i+1).padStart(2,'0')} · ${c.range.toUpperCase()}</small><h3>${c.title}</h3><p>${c.desc}<br><b>${c.stories.length} ${c.stories.length===1?'история':'истории'} доступны</b></p><button class="gold-btn" onclick="openChapter(${i})">Открыть главу</button></div></article>`).join('');document.getElementById('pathSections').innerHTML=chapters.map((c,i)=>`<div class="saved-note"><small>ЧАСТЬ ${String(i+1).padStart(2,'0')} · ${c.range}</small><br><b>${c.title}</b><p class="small-note">${c.stories.length} историй доступны</p><button class="gold-btn" onclick="openChapter(${i})">Открыть</button></div>`).join('')}
+function openStory(day){let found=typeof day==='number'?findStory(day):null;if(!found)return;let s=found.story;currentStory=s.day;document.getElementById('storyDay').textContent=`День ${s.day} · Часть ${found.chapter.index+1}`;document.getElementById('storyTitle').textContent=s.title;document.getElementById('storyImage').src=s.image||found.chapter.cover;document.getElementById('storyImage').alt=`Лея и Тим · ${s.title}`;
+document.getElementById('storyText').innerHTML=s.story.map(p=>`<p>${esc(p)}</p>`).join('');
+let insightHtml=s.insight.map((p,i)=>{if(s.day===2&&i>=3&&i<=7)return `<p>• ${esc(p)}</p>`;return `<p>${esc(p)}</p>`}).join('');
+document.getElementById('storyInsight').innerHTML=(s.insightTitle&&s.insightTitle!=='Психологический смысл'?`<b>${esc(s.insightTitle)}</b><br><br>`:'')+insightHtml;
+let practiceHtml='';if(s.day===2){practiceHtml=`<p><b>Выдели 5–10 минут. Возьми блокнот и постарайся искренне ответить на следующие вопросы.</b></p><ol>${s.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol><p><b>${esc(s.taskTitle)}</b></p><p>${esc(s.task)}</p>${s.affirmations.map(a=>`<p>«${esc(a)}»</p>`).join('')}`}else{practiceHtml=esc(s.task||'').replace(/\\n/g,'<br>')}
+document.getElementById('practiceTitle').textContent=`❀ Шаг к себе №${s.day} · ${s.practiceTitle||found.chapter.practice}`;
+document.getElementById('practiceText').innerHTML=practiceHtml;
+document.getElementById('storyQuote').innerHTML=s.day===2?`<b>${esc(s.thoughtTitle)}</b><br><br>${esc(s.thought)}<br><br><i>${esc(s.signature)}</i>`:esc(s.thought||found.chapter.quote);
+document.getElementById('practiceAnswer').value=get('practice-'+s.day,'');let done=get('completedDays',[]).includes(s.day);document.getElementById('completeBtn').textContent=done?'День уже пройден ✓':'Отметить день пройденным ✓';showPage('story')}
+
+function openDay(n){let found=findStory(n);if(found){openStory(n);return}if(get('completedDays',[]).includes(n)){toast('Этот день уже отмечен золотом ✧');return}toast('История этого дня появится в следующем обновлении. Путь уже подготовлен ♡')}
+function savePractice(){let v=document.getElementById('practiceAnswer').value.trim();if(!v){toast('Сначала запиши то, что откликается');return}put('practice-'+currentStory,v);toast('Твой шаг сохранён ♡')}
+function completeDay(){let days=get('completedDays',[]);if(!days.includes(currentStory)){days.push(currentStory);days.sort((a,b)=>a-b);put('completedDays',days)}updateProgress();document.getElementById('completeBtn').textContent='День уже пройден ✓';toast('Этот шаг теперь сияет золотом. Береги себя ♡')}
+function updateProgress(){let days=get('completedDays',[]),n=days.length,pct=n/364*100;['progressFill','progressFill2'].forEach(id=>{let e=document.getElementById(id);if(e)e.style.width=pct+'%'});document.getElementById('homeProgress').textContent=`${n} из 364`;document.getElementById('progressLabel').textContent=`${n} / 364`;document.getElementById('calendarCount').textContent=`${n} / 364`;let next=chapters.flatMap(c=>c.stories).sort((a,b)=>a.day-b.day).find(s=>!days.includes(s.day));document.getElementById('homeNext').textContent=next?`День ${next.day} · ${next.title}`:'Все опубликованные истории пройдены';renderCalendar()}
 function renderCalendar(){let el=document.getElementById('calendarGrid');if(!el)return;let done=get('completedDays',[]),html='';for(let n=1;n<=364;n++){let isDone=done.includes(n),isAvailable=availableDays.includes(n),cls=isDone?'completed':(isAvailable?'available':'');html+=`<button class="calendar-day ${cls}" ${isAvailable||isDone?`onclick="openDay(${n})"`:'disabled'} aria-label="День ${n}" title="День ${n}${isDone?' · пройдено':isAvailable?' · история доступна':' · скоро'}">${n}</button>`}el.innerHTML=html}
-function renderPractices(){document.getElementById('practiceList').innerHTML=stages.map((s,i)=>`<div class="library" style="margin-bottom:12px"><div class="eyebrow">День ${s.day} · Этап ${i+1}</div><h2 style="font-size:24px">${s.practice}</h2><p class="muted">${s.practiceText}</p><button class="gold-btn" onclick="openStory(${i})">Открыть практику</button></div>`).join('')}
+function renderPractices(){document.getElementById('practiceList').innerHTML=chapters.flatMap(c=>c.stories.map(s=>({s,c}))).sort((a,b)=>a.s.day-b.s.day).map(({s,c})=>`<div class="library" style="margin-bottom:12px"><div class="eyebrow">День ${s.day} · ${c.title}</div><h2 style="font-size:24px">${esc(s.practiceTitle||c.practice)}</h2><p class="muted">${esc(s.task||c.practiceText)}</p><button class="gold-btn" onclick="openDay(${s.day})">Открыть практику</button></div>`).join('')}
 function saveNote(){let title=document.getElementById('noteTitle').value.trim()||'Моя запись',body=document.getElementById('noteBody').value.trim();if(!body){toast('Добавь несколько слов для себя');return}let a=get('notes',[]);a.unshift({title,body,date:new Date().toLocaleDateString('ru-RU')});put('notes',a);document.getElementById('noteTitle').value='';document.getElementById('noteBody').value='';renderNotes();toast('Запись сохранена на этом устройстве')}
 function renderNotes(){let a=get('notes',[]),el=document.getElementById('notes');el.innerHTML=a.length?a.map(x=>`<div class="saved-note"><small>${esc(x.date)}</small><br><b>${esc(x.title)}</b><p>${esc(x.body).replace(/\n/g,'<br>')}</p></div>`).join(''):'<p class="muted">Пока здесь тихо. Первая запись может появиться сегодня.</p>'}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
