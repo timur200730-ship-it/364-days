@@ -10,6 +10,85 @@
 .music-art{width:54px;height:54px;flex:0 0 54px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#ffe2a5,#bd7839 48%,#4b2d2b);color:#fff3d6;font:30px 'Playfair Display',serif;box-shadow:0 3px 14px #e6a84a44}
 .music-meta{min-width:0;flex:1}.music-meta b{display:block;color:#ffe2b7;font:italic 18px 'Playfair Display',serif}.music-meta small{display:block;color:#cdbbb4;font-size:10px;margin:3px 0 8px}
 .music-meta audio{width:100%;height:34px;display:block;accent-color:#eab45e}
+
+/* ЛеТи v8 — адаптивная композиция: единый стиль, без изменения структуры и логики */
+:root{--leti-radius:30px}
+body{background:radial-gradient(ellipse at 50% 0%,#3a2528 0%,#1b1216 46%,#120d11 100%)}
+.shell{width:100%;max-width:480px;overflow:hidden;background:#1b1215}
+.hero{isolation:isolate;margin:10px 10px 0;width:calc(100% - 20px);border-radius:26px;min-height:calc(100svh - 10px);height:calc(100svh - 10px);overflow:hidden;background:#21171b}
+.hero:before{inset:0;border-radius:inherit;background-image:linear-gradient(180deg,#130d0b12 0%,#130d0b08 43%,#160e0b75 73%,#160e0bd9 100%),url('assets/home-hero.png');background-position:center 38%;background-size:cover;background-repeat:no-repeat;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
+.hero-content{padding-top:max(124px,calc(env(safe-area-inset-top) + 96px))}
+.top{top:calc(16px + env(safe-area-inset-top))}
+.bottom{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+.page{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+#home.page{padding-bottom:0}
+.reader{max-width:860px;margin:0 auto}
+.reader-img{max-height:420px}
+
+/* Большие экраны: широкое приложение, а не узкая телефонная колонка */
+@media (min-width:900px){
+  body{padding:24px 0 32px}
+  .shell{max-width:1240px;min-height:calc(100vh - 48px);margin:0 auto;border:1px solid #8c6a514d;border-radius:32px;box-shadow:0 24px 90px #0009;overflow:hidden;padding-bottom:0}
+  .top{top:28px;left:36px;right:36px}
+  .brand img{width:138px;height:96px}
+  .iconbtn{width:48px;height:48px;font-size:22px}
+  .hero{margin:0;width:100%;height:min(920px,calc(100vh - 48px));min-height:760px;border-radius:30px}
+  .hero:before{background-position:center 40%;background-size:cover;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 80%,transparent 100%)}
+  .hero-content{padding:158px 48px 330px}
+  .hero h1{font-size:clamp(58px,6vw,78px);max-width:900px}
+  .hero .tagline{font-size:12px;letter-spacing:3.2px;margin-top:14px}
+  .hero-cta{bottom:292px;width:390px;max-width:calc(100% - 80px);min-height:76px;font-size:19px}
+  .hero-cta small{font-size:13px}
+  .home-tiles{left:50%;right:auto;transform:translateX(-50%);width:min(1000px,calc(100% - 100px));bottom:184px;gap:14px}
+  .home-tile{min-height:112px;border-radius:20px;font-size:14px;padding:14px 10px}
+  .home-tile .ico{font-size:29px;margin-bottom:8px}
+  .progress-card{left:50%;right:auto;transform:translateX(-50%);width:min(1000px,calc(100% - 100px));bottom:96px;padding:16px 20px;border-radius:20px}
+  .progress-top{font-size:15px}
+  .track{height:9px}
+  .page:not(#home){max-width:1120px;margin:0 auto;padding:38px 34px 150px}
+  .page-head{padding-top:20px}
+  .page h2{font-size:42px}
+  .section-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .section-card img{height:210px}
+  .section-info{padding:16px}
+  .section-info h3{font-size:23px}
+  .section-info p{font-size:13px;min-height:56px}
+  #story .reader{max-width:900px}
+  .reader-img{height:380px;max-height:480px}
+  .reader-body{padding:30px 38px 38px}
+  .story{font-size:18px;line-height:1.9}
+  .library,.journal{padding:28px}
+  .bottom{width:min(1240px,calc(100% - 48px));bottom:24px;border:1px solid #80605099;border-bottom-left-radius:30px;border-bottom-right-radius:30px;padding:12px 24px 14px;gap:12px}
+  .nav{font-size:13px;padding:7px 5px}
+  .nav .ico{font-size:25px;margin-bottom:5px}
+}
+@media (min-width:900px) and (max-height:820px){
+  .hero{height:820px;min-height:820px}
+  .hero-content{padding-top:130px}
+  .hero-cta{bottom:270px}
+  .home-tiles{bottom:164px}
+  .progress-card{bottom:82px}
+}
+@media (max-width:899px){
+  .shell{margin:0;max-width:none;border-radius:0}
+  .bottom{left:0;transform:none;width:100%;border-radius:0}
+}
+@media (max-width:380px){
+  .hero{margin:8px 8px 0;width:calc(100% - 16px);border-radius:22px}
+  .hero-content{padding-left:14px;padding-right:14px}
+  .hero h1{font-size:clamp(34px,9vw,42px)}
+  .hero .tagline{font-size:8px;letter-spacing:1.7px}
+  .home-tile{min-height:84px;font-size:10px}
+  .home-tile .ico{font-size:21px}
+}
+@media (max-height:740px) and (max-width:899px){
+  .hero{min-height:700px;height:100svh}
+  .hero-content{padding-top:calc(env(safe-area-inset-top) + 100px)}
+  .hero-cta{bottom:250px;min-height:62px}
+  .home-tiles{bottom:160px}
+  .progress-card{bottom:86px}
+}
+
 </style></head>
 <body><main class="shell">
 <header class="top"><div></div><div class="brand"><img src="assets/leti-logo.png" alt="ЛеТи — крылья и звезда"></div><div class="top-actions"><button class="iconbtn" aria-label="Избранное" onclick="showPage('path')">♡</button><button class="iconbtn" aria-label="Разделы" onclick="showPage('sections')">☰</button></div></header>
