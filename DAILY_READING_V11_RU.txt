@@ -1,0 +1,16 @@
+LETI v11 — MOBILE NAVIGATION AND DAILY READING
+==============================================
+
+Changes:
+- The top header now reserves vertical space on all non-home pages, so the floating logo no longer overlaps the chapter/story navigation.
+- On narrow screens, navigation buttons stack vertically; on wider screens they sit in two equal columns.
+- The story page keeps separate actions: "К главе" and "На главную".
+- Chapter pages show "Прочитано X из Y опубликованных историй".
+- Each story card shows its status: completed, available, or locked.
+- Reading is sequential: the first published story is available immediately. Completing a story marks it done; the next published story becomes available on the next local calendar day. Previously completed stories can always be reopened.
+- Progress and completion timestamps are stored in this browser on this device.
+
+Important:
+- The current manuscript has only the stories actually published in the app available for sequential progression (currently Days 1 and 2). Placeholder chapter entries are not fabricated.
+- Existing progress is preserved in localStorage unless site data is cleared.
+- After deployment, hard-refresh the site (Ctrl+Shift+R on desktop; on iPhone, close/reopen the tab and refresh). The service worker cache name was updated to v11.
