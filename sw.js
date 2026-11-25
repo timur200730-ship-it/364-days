@@ -1,4 +1,4 @@
-const CACHE='leti-v14-visual-day10';
+const CACHE='leti-v12-interactive-days-9-10';
 const CORE=['./','./index.html','./manifest.webmanifest'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);
